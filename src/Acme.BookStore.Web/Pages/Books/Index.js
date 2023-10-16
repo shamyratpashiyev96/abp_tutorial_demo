@@ -18,7 +18,7 @@ $(function () {
                     rowAction: {
                         items:[
                             {
-                                text: l('Edit'),
+                                text: l('Update'),
                                 action: function(data){
                                     editModal.open({id: data.record.id });
                                 }
