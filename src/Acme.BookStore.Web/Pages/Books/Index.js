@@ -1,6 +1,8 @@
 $(function () {
     var l = abp.localization.getResource('BookStore');
 
+    var createModal = new abp.ModalManager(abp.appPath + "Books/CreateModal");
+
     var dataTable = $('#BooksTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
@@ -49,4 +51,13 @@ $(function () {
             ]
         })
     );
+
+    createModal.onResult(function (){
+        dataTable.ajax.reload();
+    });
+
+    $('#NewBookButton').click(function (e) {
+        e.preventDefault();
+        createModal.open();
+    });
 });

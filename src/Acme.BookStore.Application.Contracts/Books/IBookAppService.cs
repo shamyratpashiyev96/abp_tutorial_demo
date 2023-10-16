@@ -9,7 +9,7 @@ namespace Acme.BookStore.Books
             BookDto,
             Guid,
             PagedAndSortedResultRequestDto,
-            CreateUpdateDto>
+            CreateUpdateBookDto>
     {
         
     }

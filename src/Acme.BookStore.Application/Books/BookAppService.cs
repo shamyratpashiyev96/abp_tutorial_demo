@@ -11,7 +11,7 @@ namespace Acme.BookStore.Books
             BookDto,
             Guid,
             PagedAndSortedResultRequestDto,
-            CreateUpdateDto>, IBookAppService
+            CreateUpdateBookDto>, IBookAppService
     {
         public BookAppService(IRepository<Book,Guid> repository) : base(repository)
         {

@@ -2,7 +2,7 @@ using System;
 
 namespace Acme.BookStore.Books
 {
-    public class CreateUpdateDto
+    public class CreateUpdateBookDto
     {
         public string Name { get; set; }
 
