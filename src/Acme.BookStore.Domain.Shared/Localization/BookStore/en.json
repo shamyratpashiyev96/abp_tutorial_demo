@@ -27,6 +27,8 @@
     "Enum:BookType.6": "Science",
     "Enum:BookType.7": "Science fiction",
     "Enum:BookType.8": "Poetry",
-    "Update" : "Edit"
+    "Update" : "Edit",
+    "BookDeletionConfirmationMessage" : "Are you sure you want to delete {0}?",
+    "SuccessfullyDeleted" : "Successfully Deleted {0}"
   }
 }

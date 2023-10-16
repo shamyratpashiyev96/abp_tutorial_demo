@@ -22,6 +22,20 @@ $(function () {
                                 action: function(data){
                                     editModal.open({id: data.record.id });
                                 }
+                            },
+                            {
+                                text: l('Delete'),
+                                confirmMessage: function(data){
+                                    return l('BookDeletionConfirmationMessage', data.record.name);
+                                },
+                                action: function(data){
+                                    acme.bookStore.books.book
+                                    .delete(data.record.id)
+                                    .then(function () {
+                                        abp.notify.info(l('SuccessfullyDeleted',data.record.name));
+                                        dataTable.ajax.reload();
+                                    });
+                                }
                             }
                         ]
                     }
