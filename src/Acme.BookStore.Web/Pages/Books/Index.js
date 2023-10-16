@@ -2,6 +2,7 @@ $(function () {
     var l = abp.localization.getResource('BookStore');
 
     var createModal = new abp.ModalManager(abp.appPath + "Books/CreateModal");
+    var editModal = new abp.ModalManager(abp.appPath + "Books/EditModal");
 
     var dataTable = $('#BooksTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -12,6 +13,19 @@ $(function () {
             scrollX: true,
             ajax: abp.libs.datatables.createAjax(acme.bookStore.books.book.getList),
             columnDefs: [
+                {
+                    title: l('Actions'),
+                    rowAction: {
+                        items:[
+                            {
+                                text: l('Edit'),
+                                action: function(data){
+                                    editModal.open({id: data.record.id });
+                                }
+                            }
+                        ]
+                    }
+                },
                 {
                     title: l('Name'),
                     data: "name"
@@ -53,6 +67,10 @@ $(function () {
     );
 
     createModal.onResult(function (){
+        dataTable.ajax.reload();
+    });
+
+    editModal.onResult(function (){
         dataTable.ajax.reload();
     });
 

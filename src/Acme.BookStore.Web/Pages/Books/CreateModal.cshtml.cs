@@ -12,7 +12,7 @@ namespace Acme.BookStore.Web.Pages.Books
     {
         private readonly IBookAppService _bookAppService;
 
-        [BindProperty]
+        [BindProperty]      //Binds the properties to the <input> tags automatically
         public CreateUpdateBookDto Book { get; set; }
         public CreateModalModel(IBookAppService bookAppService)
         {
