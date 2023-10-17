@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Acme.BookStore.Localization;
 using Acme.BookStore.MultiTenancy;
+using Acme.BookStore.Permissions;
 using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.TenantManagement.Web.Navigation;
@@ -18,7 +19,7 @@ public class BookStoreMenuContributor : IMenuContributor
         }
     }
 
-    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+    private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
         var administration = context.Menu.GetAdministration();
         var l = context.GetLocalizer<BookStoreResource>();
@@ -33,20 +34,25 @@ public class BookStoreMenuContributor : IMenuContributor
                 order: 0
             )
         );
-
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
+        var bookStoreMenu = new ApplicationMenuItem(
                 "BooksStore",
                 l["Menu:BookStore"],
                 icon: "fa fa-book"
-            ).AddItem(
+            );
+
+        if(await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+        {
+            bookStoreMenu.AddItem(
                 new ApplicationMenuItem(
                     "BooksStore.Books",
                     l["Menu:Books"],
                     url: "/Books"
                 )
-            )
-        );
+            );
+        }
+                
+
+        context.Menu.AddItem(bookStoreMenu);
 
         if (MultiTenancyConsts.IsEnabled)
         {
@@ -60,6 +66,6 @@ public class BookStoreMenuContributor : IMenuContributor
         administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
         administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 3);
 
-        return Task.CompletedTask;
+        // return Task.CompletedTask;
     }
 }
