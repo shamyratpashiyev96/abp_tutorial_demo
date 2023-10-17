@@ -29,6 +29,10 @@
     "Enum:BookType.8": "Poetry",
     "Update" : "Edit",
     "BookDeletionConfirmationMessage" : "Are you sure you want to delete {0}?",
-    "SuccessfullyDeleted" : "Successfully Deleted {0}"
+    "SuccessfullyDeleted" : "Successfully Deleted {0}",
+    "Permission:Book" : "Books",
+    "Permission:Books.Create" : "Create",
+    "Permission:Books.Edit" : "Edit",
+    "Permission:Books.Delete" : "Delete"
   }
 }
