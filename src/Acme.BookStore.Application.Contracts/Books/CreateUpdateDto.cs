@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Acme.BookStore.Books
 {
     public class CreateUpdateBookDto
     {
+        [Required]
         public string Name { get; set; }
 
         public BookType Type { get; set; }
