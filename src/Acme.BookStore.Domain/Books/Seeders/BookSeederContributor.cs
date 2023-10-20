@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Acme.BookStore.Authors;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
@@ -11,12 +12,27 @@ namespace Acme.BookStore.Books.Seeders
     {
         private readonly IRepository<Book, Guid> repo;
 
-        public BookSeederContributor(IRepository<Book, Guid> _repo)
+        private readonly IAuthorRepository authorRepo;
+
+        private readonly AuthorManager authorManager;
+
+        public BookSeederContributor(
+            IRepository<Book, Guid> _repo,
+            IAuthorRepository _authorRepo,
+            AuthorManager _authorManager)
         {
             this.repo = _repo;
+            this.authorRepo = _authorRepo;
+            this.authorManager = _authorManager;
         }
 
         public async Task SeedAsync(DataSeedContext context)
+        {
+            await BookSeeder();
+            await AuthorSeeder();
+        }
+
+        public async Task BookSeeder()
         {
             List<Book> books = new(){
                 new Book{
@@ -32,8 +48,31 @@ namespace Acme.BookStore.Books.Seeders
                     Price = 42.0f
                 },
             };
+            if(await repo.GetCountAsync() <= 0)
+            {
+                await repo.InsertManyAsync(books,autoSave:true);
+            }
+        }
 
-            await repo.InsertManyAsync(books);
+        public async Task AuthorSeeder()
+        {
+            List<Author> authors = new(){
+                await authorManager.CreateAsync(
+                    "George Orwell",
+                    new DateTime(1903, 06, 25),
+                    "Orwell produced literary criticism and poetry, fiction and polemical journalism; and is best known for the allegorical novella Animal Farm (1945) and the dystopian novel Nineteen Eighty-Four (1949)."
+                ),
+                await authorManager.CreateAsync(
+                    "Douglas Adams",
+                    new DateTime(1952, 03, 11),
+                    "Douglas Adams was an English author, screenwriter, essayist, humorist, satirist and dramatist. Adams was an advocate for environmentalism and conservation, a lover of fast cars, technological innovation and the Apple Macintosh, and a self-proclaimed 'radical atheist'."
+                )
+            };
+
+            if(await authorRepo.GetCountAsync() <= 0)
+            {
+                await authorRepo.InsertManyAsync(authors);
+            }
         }
     }
 }

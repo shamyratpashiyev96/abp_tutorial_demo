@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Design.Serialization;
+using Volo.Abp.SettingManagement;
 
 namespace Acme.BookStore.Permissions;
 
@@ -11,6 +12,14 @@ public static class BookStorePermissions
     public static class Books
     {
         public const string Default = GroupName + ".Books";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete"; 
+    }
+
+    public static class Authors
+    {
+        public const string Default = GroupName + ".Authors";
         public const string Create = Default + ".Create";
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete"; 

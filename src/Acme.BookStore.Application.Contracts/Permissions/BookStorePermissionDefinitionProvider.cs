@@ -15,6 +15,11 @@ public class BookStorePermissionDefinitionProvider : PermissionDefinitionProvide
         booksPermission.AddChild(BookStorePermissions.Books.Create,L("Permission:Books.Create"));
         booksPermission.AddChild(BookStorePermissions.Books.Edit, L("Permission:Books.Edit"));
         booksPermission.AddChild(BookStorePermissions.Books.Delete, L("Permission:Books.Delete"));
+
+        var authorsPermission = bookStoreGroup.AddPermission(BookStorePermissions.Authors.Default, L("Permission:Author"));
+        authorsPermission.AddChild(BookStorePermissions.Authors.Create, L("Permission:Create"));
+        authorsPermission.AddChild(BookStorePermissions.Authors.Edit, L("Permission:Edit"));
+        authorsPermission.AddChild(BookStorePermissions.Authors.Delete, L("Permission:Delete"));
     }
 
     private static LocalizableString L(string name)
