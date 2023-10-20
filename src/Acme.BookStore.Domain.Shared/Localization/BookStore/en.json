@@ -33,6 +33,7 @@
     "Permission:Book" : "Books",
     "Permission:Books.Create" : "Create",
     "Permission:Books.Edit" : "Edit",
-    "Permission:Books.Delete" : "Delete"
+    "Permission:Books.Delete" : "Delete",
+    "BookStore:00001": "There is already an author with the same name: {name}"
   }
 }
