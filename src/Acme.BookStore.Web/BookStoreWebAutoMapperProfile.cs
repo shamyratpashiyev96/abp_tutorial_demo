@@ -11,7 +11,10 @@ public class BookStoreWebAutoMapperProfile : Profile
         //Define your AutoMapper configuration here for the Web project.
         CreateMap<BookDto, CreateUpdateBookDto>();
 
-         CreateMap<CreateUpdateAuthorDto,
+        CreateMap<CreateUpdateAuthorDto,
                     CreateAuthorDto>();
+                    
+        CreateMap<AuthorDto, CreateUpdateAuthorDto>();
+        CreateMap<CreateUpdateAuthorDto, UpdateAuthorDto>();
     }
 }

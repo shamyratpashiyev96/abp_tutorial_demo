@@ -5,6 +5,7 @@ namespace Acme.BookStore.Authors
 {
     public class CreateUpdateAuthorDto
     {
+        public Guid Id { get; set; }
         [Required]
         [StringLength(AuthorConsts.MaxNameLength)]
         public string Name { get; set; }
