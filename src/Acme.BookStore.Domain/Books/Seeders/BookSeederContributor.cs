@@ -28,24 +28,28 @@ namespace Acme.BookStore.Books.Seeders
 
         public async Task SeedAsync(DataSeedContext context)
         {
-            await BookSeeder();
             await AuthorSeeder();
+            await BookSeeder();
+
         }
 
         public async Task BookSeeder()
         {
+            List<Author> authors = await authorRepo.GetListAsync();
             List<Book> books = new(){
                 new Book{
                     Name = "1984",
                     Type = BookType.Distopia,
                     PublishDate = new DateTime(1949,6,8),
-                    Price = 19.84f
+                    Price = 19.84f,
+                    AuthorId = authors[0].Id
                 },
                 new Book{
                     Name = "The Hitchhiker's Guide to the Galaxy",
                     Type = BookType.ScienceFiction,
                     PublishDate = new DateTime(1995,9,27),
-                    Price = 42.0f
+                    Price = 42.0f,
+                    AuthorId = authors[1].Id
                 },
             };
             if(await repo.GetCountAsync() <= 0)
@@ -71,7 +75,7 @@ namespace Acme.BookStore.Books.Seeders
 
             if(await authorRepo.GetCountAsync() <= 0)
             {
-                await authorRepo.InsertManyAsync(authors);
+                await authorRepo.InsertManyAsync(authors,autoSave:true);
             }
         }
     }
