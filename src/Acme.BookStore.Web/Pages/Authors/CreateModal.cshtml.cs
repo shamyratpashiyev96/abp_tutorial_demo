@@ -30,6 +30,4 @@ namespace Acme.BookStore.Web.Pages.Authors
             return NoContent();
         }
     }
-
-    public class TextAreaChild : TextArea{}
 }
